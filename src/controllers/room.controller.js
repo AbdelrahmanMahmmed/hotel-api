@@ -80,9 +80,7 @@ exports.createRoom = asyncHandler(async (req, res) => {
         roomAmenities,
         reservationStatus,
         specialRequests,
-        Image1: uploadedImages[0] || '',
-        Image2: uploadedImages[1] || '',
-        Image3: uploadedImages[2] || '',
+        roomImages: uploadedImages,
         description
     });
 
@@ -127,13 +125,6 @@ exports.updateRoom = asyncHandler(async (req, res) => {
     if (!hotel) {
         throw new ApiError(404, 'Hotel not found');
     }
-    let uploadedImages = [];
-    if (req.files && Array.isArray(req.files)) {
-        uploadedImages = await Promise.all(req.files.map(async (file) => {
-            const result = await uploadImage(file);
-            return result.secure_url;
-        }));
-    }
     const updatedRoom = await Room.findByIdAndUpdate(req.params.id, {
         roomNumber,
         roomType,
@@ -152,7 +143,6 @@ exports.updateRoom = asyncHandler(async (req, res) => {
         roomAmenities,
         reservationStatus,
         specialRequests,
-        roomImages: uploadedImages,
         description
     }, { new: true });
     if (!updatedRoom) {
@@ -417,14 +407,6 @@ exports.updateRoomByReceptionistId = asyncHandler(async (req, res, next) => {
         return next(new ApiError('Hotel not found', 404));
     }
 
-    let uploadedImages = [];
-    if (req.files && Array.isArray(req.files)) {
-        uploadedImages = await Promise.all(req.files.map(async (file) => {
-            const result = await uploadImage(file);
-            return result.secure_url;
-        }));
-    }
-
     const {
         roomNumber, roomType, floor, pricePerNight, discounts, availability,
         checkInDate, checkOutDate, bedType, maxOccupancy, roomSize, bathroomType,
@@ -449,7 +431,6 @@ exports.updateRoomByReceptionistId = asyncHandler(async (req, res, next) => {
         roomAmenities,
         reservationStatus,
         specialRequests,
-        roomImages: uploadedImages,
         description
     }, { new: true });
     if (!updatedRoom) {

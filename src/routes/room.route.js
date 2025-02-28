@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
-// const {
-//     AddHotelVaildators,
-//     getHotelByIdValiadtors,
-//     updateHotelValiadtors,
-//     deleteHotelValiadtors,
-//     addManagerValiadtors
-// } = require('../validators/room.Validator.js');
+const {
+    createRoomVaildators,  // for Owner
+    getRoomIdVaildators,   // for Owner
+    updateRoomVaildators,  // for Owner
+    DeleteRoomVaildators,  // for Owner
+    createRoomByManagerIdVaildators,   // for Manager
+    deleteRoomByManagerIdVaildators,   // for Manager
+    getRoomByManagerIdVaildators,      // for Manager
+    updateRoomByManagerIdVaildators,   // for Manager
+    changeRoomStatusVaildators,        // for Receptionist
+    updateRoomDescriptionVaildators,   // for Receptionist
+    updateRoomDiscountVaildators,      // for Receptionist
+    updateRoomAmenitiesVaildators,     // for Receptionist
+    changeRoomAvailabilityVaildators,  // for Cleaner
+    checkoutFromRoomVaildators         // for Customer
+} = require('../validators/room.Validator.js');
 
 const {
     getrooms,     // for Owner
@@ -14,10 +23,10 @@ const {
     getRoomById,  // for Owner
     updateRoom,   // for Owner
     deleteRoom,   // for Owner
-    getRoomsByManagerId,       // for Manager
     getRoomsByStatus,          // for Manager
-    createRoomByManagerId,     //for Manager
-    deleteRoomByManagerId,     //for Manager
+    getRoomsByManagerId,       // for Manager
+    createRoomByManagerId,     // for Manager
+    deleteRoomByManagerId,     // for Manager
     updateRoomByManagerId,     // for Manager
     getRoomByManagerId,        // for Manager
     updateRoomByReceptionistId,       // for Receptionist
@@ -38,7 +47,7 @@ const { ProtectedRoters } = require('../controllers/auth.controller.js');
 // [Customer Routers]
 router
     .route('/:id/checkout')
-    .post(ProtectedRoters , checkoutFromRoom);
+    .post(ProtectedRoters , checkoutFromRoomVaildators , checkoutFromRoom);
 
 
 router.use(ProtectedRotersForStaff);
@@ -50,14 +59,19 @@ router
 
 router
     .route('/owner/:id')
-    .get(allwedToStaff('Owner'), getRoomById)
-    .put(allwedToStaff('Owner'), updateRoom)
-    .delete(allwedToStaff('Owner'), deleteRoom);
+    .get(allwedToStaff('Owner'), getRoomIdVaildators, getRoomById)
+    .put(allwedToStaff('Owner'), 
+    upload.array('images', 3),
+    updateRoomVaildators, 
+    updateRoom
+)
+    .delete(allwedToStaff('Owner'), DeleteRoomVaildators, deleteRoom);
 
 router.post(
     '/owner/create',
     allwedToStaff('Owner'),
     upload.array('images', 3),
+    createRoomVaildators,
     createRoom
 );
 
@@ -68,6 +82,7 @@ router
     .route('/manager/create')
     .post(allwedToStaff('Manager'),
         upload.array('images', 3),
+        createRoomByManagerIdVaildators,
         createRoomByManagerId
     );
 
@@ -81,15 +96,16 @@ router
 
 router
     .route('/manager/:id')
-    .delete(allwedToStaff('Manager'), deleteRoomByManagerId)
+    .delete(allwedToStaff('Manager'), deleteRoomByManagerIdVaildators ,  deleteRoomByManagerId)
     .put(allwedToStaff('Manager'),
         upload.array('images', 3),
+        updateRoomByManagerIdVaildators,
         updateRoomByManagerId
     );
 
 router
     .route('/manager/:id')
-    .get(allwedToStaff('Manager'), getRoomByManagerId);
+    .get(allwedToStaff('Manager'), getRoomByManagerIdVaildators, getRoomByManagerId);
 
 // [Receptionist Routers]
 
@@ -102,26 +118,26 @@ router
 
 router
     .route('/receptionist/:id/status')
-    .patch(allwedToStaff('Receptionist'), changeRoomStatus);
+    .patch(allwedToStaff('Receptionist'), changeRoomStatusVaildators , changeRoomStatus);
 
 router
     .route('/receptionist/:id/description')
-    .patch(allwedToStaff('Receptionist'), updateRoomDescription);
+    .patch(allwedToStaff('Receptionist'), updateRoomDescriptionVaildators , updateRoomDescription);
 
 router
     .route('/receptionist/:id/discount')
-    .patch(allwedToStaff('Receptionist'), updateRoomDiscount);
+    .patch(allwedToStaff('Receptionist'), updateRoomDiscountVaildators , updateRoomDiscount);
 
 router
     .route('/receptionist/:id/amenities')
-    .patch(allwedToStaff('Receptionist'), updateRoomAmenities);
+    .patch(allwedToStaff('Receptionist'), updateRoomAmenitiesVaildators ,  updateRoomAmenities);
 
 // [Cleaner Routers]
 
 
 router
     .route('/cleaner/:id/availability')
-    .patch(allwedToStaff('Cleaner'), changeRoomAvailability);
+    .patch(allwedToStaff('Cleaner'), changeRoomAvailabilityVaildators , changeRoomAvailability);
 
 router
     .route('/cleaner/without-availability')
