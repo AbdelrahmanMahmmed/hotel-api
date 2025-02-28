@@ -1,0 +1,1216 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hotel API Documentation",
+    "version": "1.0.0",
+    "description": "API documentation for the application"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Root endpoint",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a new user",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login a user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/verify/user": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Verify user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/verify/code": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Verify code",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/password/forgot-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Forgot password",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/password/verify-otp": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Verify OTP",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/password/reset": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Reset password",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/profile": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete user profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/profile/upload-image": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Upload profile image",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/profile/update-name": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update user name",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/owner/all-users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all users (owner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/all-users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all users (manager)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/staff/profile": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get staff profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/admin/create-user": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a new user (admin)",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/user/admin/update-role/{id}": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update user role (admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/admin/change-password": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Change user password (admin)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/admin/{id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user by ID (admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["User"],
+        "summary": "Update user by ID (admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete user by ID (admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/user/staff/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Staff login",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/hotel/owner/create": {
+      "post": {
+        "tags": ["Hotel"],
+        "summary": "Create a new hotel (owner)",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/hotel/owner/{id}": {
+      "get": {
+        "tags": ["Hotel"],
+        "summary": "Get hotel by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Hotel"],
+        "summary": "Update hotel by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Hotel"],
+        "summary": "Delete hotel by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/hotel/owner": {
+      "get": {
+        "tags": ["Hotel"],
+        "summary": "Get all hotels (owner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/{id}/checkout": {
+      "post": {
+        "tags": ["Room"],
+        "summary": "Checkout room by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/owner/all": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get all rooms (owner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/owner/{id}": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get room by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Room"],
+        "summary": "Update room by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Room"],
+        "summary": "Delete room by ID (owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/owner/create": {
+      "post": {
+        "tags": ["Room"],
+        "summary": "Create a new room (owner)",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/room/manager/create": {
+      "post": {
+        "tags": ["Room"],
+        "summary": "Create a new room (manager)",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/room/manager/all": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get all rooms (manager)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/manager/status": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get room status (manager)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/manager/{id}": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get room by ID (manager)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Room"],
+        "summary": "Update room by ID (manager)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Room"],
+        "summary": "Delete room by ID (manager)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/receptionist/{id}": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room by ID (receptionist)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/receptionist/{id}/status": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room status by ID (receptionist)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/receptionist/{id}/description": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room description by ID (receptionist)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/receptionist/{id}/discount": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room discount by ID (receptionist)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/receptionist/{id}/amenities": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room amenities by ID (receptionist)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/cleaner/{id}/availability": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update room availability by ID (cleaner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/cleaner/without-availability": {
+      "get": {
+        "tags": ["Room"],
+        "summary": "Get rooms without availability (cleaner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/booking": {
+      "post": {
+        "tags": ["Booking"],
+        "summary": "Create a new booking",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Booking"],
+        "summary": "Get all bookings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/booking/{id}": {
+      "put": {
+        "tags": ["Booking"],
+        "summary": "Update booking by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Booking"],
+        "summary": "Get booking by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/booking/owner/all": {
+      "get": {
+        "tags": ["Booking"],
+        "summary": "Get all bookings (owner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/payment/checkout": {
+      "post": {
+        "tags": ["Payment"],
+        "summary": "Checkout payment",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/payment/request-cancellation": {
+      "post": {
+        "tags": ["Payment"],
+        "summary": "Request payment cancellation",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/payment/owner/payments": {
+      "get": {
+        "tags": ["Payment"],
+        "summary": "Get all payments (owner)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/payment/staff/payments": {
+      "get": {
+        "tags": ["Payment"],
+        "summary": "Get all payments (staff)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/analysis/totalAmount": {
+      "get": {
+        "tags": ["Analysis"],
+        "summary": "Get total amount analysis",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 20,
+              "example": "John Doe"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "john@example.com"
+            },
+            "password": {
+              "type": "string",
+              "minLength": 6,
+              "example": "password123"
+            },
+            "role": {
+              "type": "string",
+              "enum": ["Customer"],
+              "default": "Customer"
+            },
+            "phone": {
+              "type": "string",
+              "example": "1234567890"
+            },
+            "profilePicture": {
+              "type": "string",
+              "default": "default_profile_picture.png"
+            },
+            "Payments": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "isVerified": {
+              "type": "boolean",
+              "default": false
+            },
+            "passwordChanagedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "UserResetCode": {
+              "type": "string"
+            },
+            "UserResetExpire": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "passwordResetCode": {
+              "type": "string"
+            },
+            "passwordResetExpiret": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "passwordResetVerifed": {
+              "type": "boolean"
+            }
+          },
+          "required": ["name", "email", "password"]
+        },
+        "Staff": {
+          "type": "object",
+          "properties": {
+            "HotelId": {
+              "type": "string",
+              "example": "hotel-123"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 20,
+              "example": "Alice"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "alice@example.com"
+            },
+            "password": {
+              "type": "string",
+              "minLength": 6,
+              "example": "password123"
+            },
+            "role": {
+              "type": "string",
+              "enum": ["Owner", "Manager", "Receptionist", "Cleaner"],
+              "example": "Manager"
+            },
+            "phone": {
+              "type": "string",
+              "example": "1234567890"
+            },
+            "isVerified": {
+              "type": "boolean",
+              "default": true
+            },
+            "passwordChanagedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "StaffResetCode": {
+              "type": "string"
+            },
+            "StaffResetExpire": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "passwordResetCode": {
+              "type": "string"
+            },
+            "passwordResetExpiret": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "passwordResetVerifed": {
+              "type": "boolean"
+            }
+          },
+          "required": ["HotelId", "name", "email", "password", "role"]
+        },
+        "Hotel": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Grand Hotel"
+            },
+            "location": {
+              "type": "string",
+              "example": "New York"
+            },
+            "description": {
+              "type": "string",
+              "example": "A luxurious hotel in the heart of the city."
+            },
+            "MainImage": {
+              "type": "string",
+              "default": "default_profile_picture.png"
+            },
+            "image1": {
+              "type": "string",
+              "default": "default_profile_picture.png"
+            },
+            "image2": {
+              "type": "string",
+              "default": "default_profile_picture.png"
+            },
+            "image3": {
+              "type": "string",
+              "default": "default_profile_picture.png"
+            },
+            "rating": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5,
+              "default": 0
+            },
+            "pricePerNight": {
+              "type": "number",
+              "example": 150
+            },
+            "amenities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["WiFi", "Pool", "Gym"]
+            },
+            "managerId": {
+              "type": "string",
+              "example": "staff-123"
+            },
+            "staffsIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["staff-456", "staff-789"]
+            }
+          },
+          "required": ["name", "location", "pricePerNight"]
+        },
+        "Room": {
+          "type": "object",
+          "properties": {
+            "HotelId": {
+              "type": "string",
+              "example": "hotel-123"
+            },
+            "roomNumber": {
+              "type": "string",
+              "example": "101"
+            },
+            "roomType": {
+              "type": "string",
+              "enum": ["single", "double", "suite", "deluxe"],
+              "example": "double"
+            },
+            "floor": {
+              "type": "number",
+              "example": 2
+            },
+            "pricePerNight": {
+              "type": "number",
+              "example": 150
+            },
+            "discounts": {
+              "type": "number",
+              "default": 0
+            },
+            "availability": {
+              "type": "boolean",
+              "default": true
+            },
+            "checkInDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "checkOutDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "bedType": {
+              "type": "string",
+              "enum": ["single", "double", "queen", "king"],
+              "example": "queen"
+            },
+            "maxOccupancy": {
+              "type": "number",
+              "example": 4
+            },
+            "roomSize": {
+              "type": "number",
+              "example": 300
+            },
+            "bathroomType": {
+              "type": "string",
+              "enum": ["private", "shared"],
+              "example": "private"
+            },
+            "view": {
+              "type": "string",
+              "enum": ["sea", "city", "garden", "pool"],
+              "example": "sea"
+            },
+            "smokingPolicy": {
+              "type": "string",
+              "enum": ["allowed", "not allowed"],
+              "example": "not allowed"
+            },
+            "roomAmenities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["TV", "Mini Bar", "AC"]
+            },
+            "reservationStatus": {
+              "type": "string",
+              "enum": ["confirmed", "pending", "cancelled"],
+              "default": "pending"
+            },
+            "specialRequests": {
+              "type": "string",
+              "default": ""
+            },
+            "roomImages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["image1.jpg", "image2.jpg"]
+            },
+            "description": {
+              "type": "string",
+              "example": "A spacious room with a sea view."
+            }
+          },
+          "required": ["HotelId", "roomNumber", "roomType", "floor", "pricePerNight", "bedType", "maxOccupancy", "roomSize", "bathroomType", "view", "smokingPolicy"]
+        },
+        "Booking": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "example": "user-123"
+            },
+            "room": {
+              "type": "string",
+              "example": "room-456"
+            },
+            "hotel": {
+              "type": "string",
+              "example": "hotel-789"
+            },
+            "checkInDate": {
+              "type": "string",
+              "format": "date",
+              "example": "2023-12-01"
+            },
+            "checkOutDate": {
+              "type": "string",
+              "format": "date",
+              "example": "2023-12-05"
+            },
+            "guests": {
+              "type": "object",
+              "properties": {
+                "adults": {
+                  "type": "number",
+                  "example": 2
+                },
+                "children": {
+                  "type": "number",
+                  "default": 0
+                }
+              },
+              "required": ["adults"]
+            },
+            "NumberOfDays": {
+              "type": "number",
+              "example": 4
+            },
+            "totalPrice": {
+              "type": "number",
+              "example": 600
+            },
+            "status": {
+              "type": "string",
+              "enum": ["pending", "confirmed", "cancelled", "completed"],
+              "default": "pending"
+            },
+            "paymentStatus": {
+              "type": "string",
+              "enum": ["pending", "paid", "failed"],
+              "default": "pending"
+            }
+          },
+          "required": ["user", "room", "hotel", "checkInDate", "checkOutDate", "guests", "NumberOfDays"]
+        },
+        "Payment": {
+          "type": "object",
+          "properties": {
+            "hotel": {
+              "type": "string",
+              "example": "hotel-123"
+            },
+            "room": {
+              "type": "string",
+              "example": "room-456"
+            },
+            "booking": {
+              "type": "string",
+              "example": "booking-789"
+            },
+            "paymentMethod": {
+              "type": "string",
+              "enum": ["online", "cash"],
+              "example": "online"
+            },
+            "amount": {
+              "type": "number",
+              "example": 600
+            },
+            "transactionId": {
+              "type": "string",
+              "example": "txn-123456"
+            },
+            "paymentDate": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-12-01T12:00:00Z"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["completed", "failed"],
+              "example": "completed"
+            }
+          },
+          "required": ["hotel", "room", "booking", "paymentMethod", "amount", "transactionId", "paymentDate", "status"]
+        }
+      }
+    }
+}
