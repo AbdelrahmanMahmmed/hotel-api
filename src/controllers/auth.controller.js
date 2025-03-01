@@ -43,7 +43,7 @@ exports.RegisterUser = asyncHandler(async (req, res, next) => {
         return next(new ApiError('Failed to send email, please try again later', 500));
     }
 
-    logger.info(`User registered in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
+    //logger.info(`User registered in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
     // 4) Send the token in response
     res.status(201).json({
         Customer,
@@ -65,7 +65,7 @@ exports.LoginUser = asyncHandler(async (req, res, next) => {
         maxAge: process.env.COOKIE_EXPIRES_TIME,
         sameSite: "Lax"
     });
-    logger.info(`User logged in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
+    //logger.info(`User logged in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
     res.json({ Customer, token });
 });
 

@@ -286,7 +286,7 @@ exports.LoginStaff = asyncHandler(async (req, res, next) => {
         maxAge: process.env.COOKIE_EXPIRES_TIME,
         sameSite: "Lax"
     });
-    logger.info(`staff logged in: ${staff.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
+    //logger.info(`staff logged in: ${staff.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
     res.json({ staff, token });
 });
 // Protected Routers and Allowed
