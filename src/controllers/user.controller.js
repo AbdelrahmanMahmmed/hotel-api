@@ -9,7 +9,7 @@ const { uploadImage } = require('../utils/UploadImage');
 const SendEmail = require('../utils/sendEmail.js');
 const cookieParser = require('cookie-parser');
 const bcyrpt = require('bcryptjs');
-const logger = require('../utils/logger.js');
+//const logger = require('../utils/logger.js');
 
 // Get Profile Customer
 exports.getUser = asyncHandler(async (req, res, next) => {

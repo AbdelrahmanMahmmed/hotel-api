@@ -2,7 +2,7 @@ const { json } = require('express');
 const Hotel = require('../models/hotel.model.js');
 const ApiError = require('../utils/APIError.js');
 const asyncHandler = require('express-async-handler')
-const logger = require('../utils/logger.js');
+//const logger = require('../utils/logger.js');
 const { uploadImage } = require('../utils/UploadImage.js')
 
 

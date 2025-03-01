@@ -7,7 +7,7 @@ const bcyrpt = require('bcryptjs');
 const crypto = require('crypto');
 const SendEmail = require('../utils/sendEmail.js');
 const cookieParser = require('cookie-parser');
-const logger = require('../utils/logger.js');
+//const logger = require('../utils/logger.js');
 
 // register and Login
 exports.RegisterUser = asyncHandler(async (req, res, next) => {
