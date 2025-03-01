@@ -28,17 +28,11 @@ exports.addBookingVaildators = [
         .isDate()
         .withMessage('Check-out date is not valid'),
 
-    body('guests')
+    body('guests.adults')
         .notEmpty()
         .withMessage('Guests is required')
         .isNumeric()
         .withMessage('Guests must be a number'),
-
-    body('price')
-        .notEmpty()
-        .withMessage('Price is required')
-        .isNumeric()
-        .withMessage('Price must be a number'),
 
     body('status')
         .notEmpty()

@@ -153,37 +153,34 @@ exports.getBookings = asyncHandler(async (req, res) => {
 });
 //Get all bookings across all hotels
 exports.getAllBookings = asyncHandler(async (req, res) => {
-    const staffId = req.staff._id;
-    const staffRole = req.staff.role;
-
-    if (staffRole === 'Owner') {
-        const hotels = await Hotel.find().select('_id');
-        if (hotels.length === 0) {
-            return res.status(404).json({ message: "No hotels found" });
-        }
-
-        const hotelIds = hotels.map(hotel => hotel._id);
-
-        const bookings = await Booking.find({
-            hotel: { $in: hotelIds },
-            status: { $ne: "cancelled" }
+    const staffId = req.staff._id
+    // pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const total = await Booking.countDocuments();
+    const bookings = await Booking.find()
+        .select('-status -_id -createdAt -updatedAt -__v -checkOutDate')
+        .populate('user', 'name email -_id')
+        .populate('room', 'roomNumber roomType availability floor -_id')
+        .populate({
+            path: 'hotel',
+            select: 'name managerId -_id',
+            populate: {
+                path: 'managerId',
+                select: 'name -_id'
+            }
         })
-            .select('-status -_id -createdAt -updatedAt -__v -checkOutDate')
-            .populate('user', 'name email -_id')
-            .populate('room', 'roomNumber roomType availability floor -_id')
-            .populate({
-                path: 'hotel',
-                select: 'name managerId -_id',
-                populate: {
-                    path: 'managerId',
-                    select: 'name -_id'
-                }
-            });
-
-        return res.json(bookings);
-    }
-
-    return res.status(403).json({ message: "Unauthorized" });
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .skip(startIndex);
+    res.json({
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+        bookings
+    });
 });
 // Get a specific booking by ID
 exports.getBookingById = asyncHandler(async (req, res) => {
