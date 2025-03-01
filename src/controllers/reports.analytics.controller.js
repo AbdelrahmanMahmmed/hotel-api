@@ -1,6 +1,6 @@
 const Payment = require('../models/payment.model.js');
 const asyncHandler = require('express-async-handler')
-const ApiError = require('../utils/ApiError');
+const ApiError = require('../utils//APIError.js');
 
 // Get Total in amount in all PaymentModel
 exports.getAnalyticsPayment = asyncHandler(async (req, res, next) => {
