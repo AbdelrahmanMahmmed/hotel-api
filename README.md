@@ -79,7 +79,7 @@ The Hotel API is a comprehensive backend service designed to manage hotel operat
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/your-repo/hotel-api.git
+    git clone https://github.com/AbdelrahmanMahmmed/hotel-api
     cd hotel-api
     ```
 
