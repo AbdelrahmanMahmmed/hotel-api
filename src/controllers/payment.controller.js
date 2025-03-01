@@ -141,7 +141,6 @@ exports.getPayments = asyncHandler(async (req, res) => {
     });
 });
 
-
 // View all payments (successful & failed) for Manager & Receptionist
 exports.getStaffPayments = asyncHandler(async (req, res) => {
     const { _id: staffId, role: staffRole } = req.staff;

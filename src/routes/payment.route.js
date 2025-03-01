@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// const {
-//     AddHotelVaildators,
-//     getHotelByIdValiadtors,
-//     updateHotelValiadtors,
-//     deleteHotelValiadtors,
-// } = require('../validators/hotel.Validator.js');
+const {
+    processPaymentVaildators,
+    requestCancellationVaildators
+} = require('../validators/payment.Validator.js');
 
 const {
     processPayment,        // for Customer
@@ -24,12 +22,12 @@ const { ProtectedRoters } = require('../controllers/auth.controller.js');
 // Checkout payment
 router
     .route('/checkout')
-    .post(ProtectedRoters, processPayment);
+    .post(ProtectedRoters, processPaymentVaildators , processPayment);
 
 // Request Cancellation of a Booking By Customer After Payment
 router
     .route('/request-cancellation')
-    .post(ProtectedRoters, requestCancellation);
+    .post(ProtectedRoters, requestCancellationVaildators ,  requestCancellation);
 
 // [Owner Routers]
 router

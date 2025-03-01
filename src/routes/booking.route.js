@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const {
+    addBookingVaildators,
+    cancelBookingVaildators,
+    getBookingByIdVaildators,
+} = require('../validators/booking.Validator.js');
+
+const {
     addBooking,
     cancelBooking,
     getBookings,
@@ -15,10 +21,10 @@ const { ProtectedRotersForStaff, allwedToStaff } = require('../controllers/user.
 // ======================= [ Customer Routes ] =======================
 
 // Booking a room By Customer
-router.post('/', ProtectedRoters, addBooking);
+router.post('/', ProtectedRoters, addBookingVaildators, addBooking);
 
 // Canceling a Booking By Customer
-router.put('/:id', ProtectedRoters, cancelBooking);
+router.put('/:id', ProtectedRoters, cancelBookingVaildators, cancelBooking);
 
 // ======================= [ Manager & Receptionist Routes ] =======================
 
@@ -35,6 +41,7 @@ router.get(
     '/:id',
     ProtectedRotersForStaff,
     allwedToStaff('Owner', 'Manager', 'Receptionist'),
+    getBookingByIdVaildators,
     getBookingById
 );
 
