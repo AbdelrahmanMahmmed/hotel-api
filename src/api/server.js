@@ -17,7 +17,7 @@ const endpoints = listEndpoints(app).map(endpoint => ({
 
 // Start the server
 const server = app.listen(PORT, () => {
-    console.log(`Worker ${process.pid} is running on port ${PORT}`);
+    console.log(`App is running on port ${PORT}`);
 });
 
 // Handle unhandled promise rejections
