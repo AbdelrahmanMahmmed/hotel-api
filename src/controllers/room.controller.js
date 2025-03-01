@@ -3,7 +3,7 @@ const Room = require('../models/room.model.js');
 const Hotel = require('../models/hotel.model.js');
 const ApiError = require('../utils/APIError.js');
 const asyncHandler = require('express-async-handler')
-//const logger = require('../utils/logger.js');
+const logger = require('../utils/logger.js');
 const { uploadImage } = require('../utils/UploadImage.js')
 
 // [Owner Controllers]
@@ -30,7 +30,7 @@ exports.getrooms = asyncHandler(async (req, res) => {
         .skip(startIndex)
         .limit(limit);
 
-    //logger.info(`GET /api/rooms?page=${page}&limit=${limit}&StatusRoom=${StatusRoom}`);
+    logger.info(`GET /api/rooms?page=${page}&limit=${limit}&StatusRoom=${StatusRoom}`);
     res.status(200).json({
         totalRooms,
         message: 'Rooms fetched successfully',
@@ -86,7 +86,7 @@ exports.createRoom = asyncHandler(async (req, res) => {
 
     await newRoom.save();
 
-    //logger.info(`POST /api/rooms?hotelId=${hotelId}`);
+    logger.info(`POST /api/rooms?hotelId=${hotelId}`);
     res.status(201).json({
         success: true,
         message: 'Room created successfully',
@@ -108,7 +108,7 @@ exports.getRoomById = asyncHandler(async (req, res) => {
     if (!room) {
         throw new ApiError(404, 'Room not found');
     }
-    //logger.info(`GET /api/rooms/${req.params.id}`);
+    logger.info(`GET /api/rooms/${req.params.id}`);
     res.status(200).json({
         DetailsOfRoom: room,
     });
@@ -148,7 +148,7 @@ exports.updateRoom = asyncHandler(async (req, res) => {
     if (!updatedRoom) {
         throw new ApiError(404, 'Room not found');
     }
-    //logger.info(`PUT /api/rooms/${req.params.id}`);
+    logger.info(`PUT /api/rooms/${req.params.id}`);
     res.status(200).json({
         message: 'Room updated successfully',
     });
@@ -172,7 +172,7 @@ exports.updateRoomImages = asyncHandler(async (req, res) => {
     if (!room) {
         throw new ApiError(404, 'Room not found');
     }
-    //logger.info(`PUT /api/rooms/${roomId}/images`);
+    logger.info(`PUT /api/rooms/${roomId}/images`);
     res.status(200).json({
         message: 'Room images updated successfully',
     });
@@ -186,7 +186,7 @@ exports.deleteRoom = asyncHandler(async (req, res) => {
     if (room.reservationStatus === "confirmed") {
         throw new ApiError(400, 'Cannot delete a confirmed reservation');
     }
-    //logger.info(`DELETE /api/rooms/${req.params.id}`);
+    logger.info(`DELETE /api/rooms/${req.params.id}`);
     res.status(200).json({
         message: 'Room deleted successfully',
     });
@@ -223,9 +223,9 @@ exports.getRoomsByManagerId = asyncHandler(async (req, res, next) => {
         .skip(startIndex)
         .limit(limit);
 
-    // if (logger) {
-    //     logger.info(`GET /api/rooms/manager/${managerId}`);
-    // }
+    if (logger) {
+        logger.info(`GET /api/rooms/manager/${managerId}`);
+    }
 
     res.status(200).json({
         totalRooms,
@@ -259,7 +259,7 @@ exports.getRoomsByStatus = asyncHandler(async (req, res, next) => {
             }
         }).skip(startIndex).limit(limit);
 
-    //logger.info(`GET /api/rooms/manager/${managerId}?reservationStatus=${reservationStatus}`);
+    logger.info(`GET /api/rooms/manager/${managerId}?reservationStatus=${reservationStatus}`);
     res.status(200).json({
         totalRooms,
         message: 'Rooms fetched successfully',
@@ -313,7 +313,7 @@ exports.createRoomByManagerId = asyncHandler(async (req, res, next) => {
         description
     });
     await newRoom.save();
-    //logger.info(`POST /api/rooms/manager/${managerId}`);
+    logger.info(`POST /api/rooms/manager/${managerId}`);
     res.status(201).json({
         message: 'Room created successfully',
         room: newRoom,
@@ -333,7 +333,7 @@ exports.deleteRoomByManagerId = asyncHandler(async (req, res, next) => {
     if (room.reservationStatus === "confirmed") {
         return next(new ApiError('Cannot delete a confirmed reservation', 400));
     }
-    //logger.info(`DELETE /api/rooms/manager/${managerId}/${req.params.id}`);
+    logger.info(`DELETE /api/rooms/manager/${managerId}/${req.params.id}`);
     res.status(200).json({
         message: 'Room deleted successfully',
     });
@@ -374,7 +374,7 @@ exports.updateRoomByManagerId = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/manager/${managerId}/${req.params.id}`);
+    logger.info(`PUT /api/rooms/manager/${managerId}/${req.params.id}`);
     res.status(200).json({
         message: 'Room updated successfully',
     });
@@ -402,7 +402,7 @@ exports.updateRoomImagesByManagerId = asyncHandler(async (req, res, next) => {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
 
-    //logger.info(`PUT /api/rooms/images/manager/${managerId}/${req.params.id}`);
+    logger.info(`PUT /api/rooms/images/manager/${managerId}/${req.params.id}`);
     res.status(200).json({
         message: 'Room images updated successfully',
     });
@@ -431,7 +431,7 @@ exports.getRoomByManagerId = asyncHandler(async (req, res, next) => {
         return next(new ApiError(`Room not found or does not belong to hotel : ${hotel.name}`, 404));
     }
 
-    //logger.info(`GET /api/rooms/manager/${req.params.id}`);
+    logger.info(`GET /api/rooms/manager/${req.params.id}`);
     res.status(200).json({
         message: 'Room fetched successfully',
         room,
@@ -480,7 +480,7 @@ exports.updateRoomByReceptionistId = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/manager/${receptionistId}/${req.params.id}`);
+    logger.info(`PUT /api/rooms/manager/${receptionistId}/${req.params.id}`);
     res.status(200).json({
         message: 'Room updated successfully',
     });
@@ -500,7 +500,7 @@ exports.changeRoomStatus = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/status`);
+    logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/status`);
     res.status(200).json({
         message: 'Room status updated successfully',
         data: updatedRoom.reservationStatus
@@ -521,7 +521,7 @@ exports.updateRoomDescription = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/description`);
+    logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/description`);
     res.status(200).json({
         message: 'Room description updated successfully',
         data: updatedRoom.description
@@ -542,7 +542,7 @@ exports.updateRoomDiscount = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/discount`);
+    logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/discount`);
     res.status(200).json({
         message: 'Room discount updated successfully',
         data: updatedRoom.discounts
@@ -563,7 +563,7 @@ exports.updateRoomAmenities = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/amenities`);
+    logger.info(`PUT /api/rooms/receptionist/${receptionistId}/${req.params.id}/amenities`);
     res.status(200).json({
         message: 'Room amenities updated successfully',
         data: updatedRoom.roomAmenities
@@ -590,7 +590,7 @@ exports.changeRoomAvailability = asyncHandler(async (req, res, next) => {
     if (!updatedRoom) {
         return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
     }
-    //logger.info(`PUT /api/rooms/receptionist/${cleanerId}/${req.params.id}/availability`);
+    logger.info(`PUT /api/rooms/receptionist/${cleanerId}/${req.params.id}/availability`);
     res.status(200).json({
         message: 'Room availability updated successfully',
         data: updatedRoom.availability
@@ -608,7 +608,7 @@ exports.getRoomsWithoutAvailability = asyncHandler(async (req, res, next) => {
     if (rooms.length === 0) {
         return next(new ApiError('No rooms found without availability', 404));
     }
-    //logger.info(`GET /api/rooms/receptionist/${cleanerId}/without-availability`);
+    logger.info(`GET /api/rooms/receptionist/${cleanerId}/without-availability`);
     res.status(200).json({
         data: rooms
     });
@@ -631,7 +631,7 @@ exports.checkoutFromRoom = asyncHandler(async (req, res, next) => {
         checkOutDate: new Date()
     }, { new: true });
 
-    //logger.info(`POST /api/rooms/customer/${req.params.id}/checkout`);
+    logger.info(`POST /api/rooms/customer/${req.params.id}/checkout`);
     res.status(200).json({
         message: 'Room checkout successful',
     });

@@ -2,7 +2,7 @@ const { json } = require('express');
 const Hotel = require('../models/hotel.model.js');
 const ApiError = require('../utils/APIError.js');
 const asyncHandler = require('express-async-handler')
-//const logger = require('../utils/logger.js');
+const logger = require('../utils/logger.js');
 const { uploadImage } = require('../utils/UploadImage.js')
 
 
@@ -33,7 +33,7 @@ exports.addhotel = asyncHandler(async (req, res) => {
         });
         await hotel.save();
         const userName = req.user ? req.user.name : "Unknown User";
-        //logger.info(`Manager added a new hotel by: ${userName}, Time: ${new Date().toISOString()}`);
+        logger.info(`Manager added a new hotel by: ${userName}, Time: ${new Date().toISOString()}`);
         res.status(201).json({ message: 'Hotel created successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
