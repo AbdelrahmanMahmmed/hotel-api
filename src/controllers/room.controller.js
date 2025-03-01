@@ -153,6 +153,30 @@ exports.updateRoom = asyncHandler(async (req, res) => {
         message: 'Room updated successfully',
     });
 });
+// Update a Images Room in any hotel
+exports.updateRoomImages = asyncHandler(async (req, res) => {
+    const { roomId } = req.params;
+    let uploadedImages = [];
+    if (req.files && Array.isArray(req.files)) {
+        uploadedImages = await Promise.all(req.files.map(async (file) => {
+            const result = await uploadImage(file);
+            return result.secure_url;
+        }));
+    }    const hotel = await Hotel.findById(req.staff.hotelId);
+    if (!hotel) {
+        throw new ApiError(404, 'Hotel not found');
+    }
+    const room = await Room.findByIdAndUpdate(roomId, {
+        roomImages: uploadedImages
+    }, { new: true });
+    if (!room) {
+        throw new ApiError(404, 'Room not found');
+    }
+    logger.info(`PUT /api/rooms/${roomId}/images`);
+    res.status(200).json({
+        message: 'Room images updated successfully',
+    });
+});
 // Delete a Room in any hotel
 exports.deleteRoom = asyncHandler(async (req, res) => {
     const room = await Room.findByIdAndDelete(req.params.id)
@@ -321,13 +345,6 @@ exports.updateRoomByManagerId = asyncHandler(async (req, res, next) => {
     if (!hotel) {
         return next(new ApiError('Hotel not found', 404));
     }
-    let uploadedImages = [];
-    if (req.files && Array.isArray(req.files)) {
-        uploadedImages = await Promise.all(req.files.map(async (file) => {
-            const result = await uploadImage(file);
-            return result.secure_url;
-        }));
-    }
     const {
         roomNumber, roomType, floor, pricePerNight, discounts, availability,
         checkInDate, checkOutDate, bedType, maxOccupancy, roomSize, bathroomType,
@@ -352,7 +369,6 @@ exports.updateRoomByManagerId = asyncHandler(async (req, res, next) => {
         roomAmenities,
         reservationStatus,
         specialRequests,
-        roomImages: uploadedImages,
         description
     }, { new: true });
     if (!updatedRoom) {
@@ -361,6 +377,34 @@ exports.updateRoomByManagerId = asyncHandler(async (req, res, next) => {
     logger.info(`PUT /api/rooms/manager/${managerId}/${req.params.id}`);
     res.status(200).json({
         message: 'Room updated successfully',
+    });
+});
+
+// Update a Images room by its ID if the room exists within the same hotel managed by the manager with managerId
+exports.updateRoomImagesByManagerId = asyncHandler(async (req, res, next) => {
+    const managerId = req.staff._id;
+    const hotel = await Hotel.findOne({ managerId });
+    if (!hotel) {
+        return next(new ApiError('Hotel not found', 404));
+    }
+    let uploadedImages = [];
+    if (req.files && Array.isArray(req.files)) {
+        uploadedImages = await Promise.all(req.files.map(async (file) => {
+            const result = await uploadImage(file);
+            return result.secure_url;
+        }));
+    }
+    const room = await Room.findByIdAndUpdate(req.params.id, {
+        roomImages: uploadedImages
+    }, { new: true });
+
+    if (!room) {
+        return next(new ApiError(`Room not found in hotel ${hotel.name}`, 404));
+    }
+
+    logger.info(`PUT /api/rooms/images/manager/${managerId}/${req.params.id}`);
+    res.status(200).json({
+        message: 'Room images updated successfully',
     });
 });
 // Retrieve room data if it is located within the hotel managed by the manager with managerId

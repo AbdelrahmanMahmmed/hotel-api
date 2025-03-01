@@ -270,6 +270,19 @@ exports.updateRoomVaildators = [
 
     validatorsMiddleware,
 ];
+exports.updateRoomImagesVaildators = [
+    param('id').isMongoId().withMessage('Invalid User id'),
+
+    body('images')
+        .custom((_, { req }) => {
+            if (!req.files || req.files.length < 1) {
+                throw new Error('At least one image is required');
+            }
+            return true;
+        }),
+
+    validatorsMiddleware,
+];
 exports.DeleteRoomVaildators = [
     param('id').isMongoId().withMessage('Invalid User id'),
     validatorsMiddleware,
@@ -402,6 +415,19 @@ exports.deleteRoomByManagerIdVaildators = [
 ];
 exports.getRoomByManagerIdVaildators = [
     param('id').isMongoId().withMessage('Invalid User id'),
+    validatorsMiddleware,
+];
+exports.updateRoomImagesByManagerIdVaildators = [
+    param('id').isMongoId().withMessage('Invalid User id'),
+
+    body('images')
+        .custom((_, { req }) => {
+            if (!req.files || req.files.length < 1) {
+                throw new Error('At least one image is required');
+            }
+            return true;
+        }),
+
     validatorsMiddleware,
 ];
 exports.updateRoomByManagerIdVaildators = [

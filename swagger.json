@@ -384,6 +384,27 @@
         }
       }
     },
+    "/api/v1/room/owner/:id/images": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update Images room by (Owner)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/room/owner/all": {
       "get": {
         "tags": ["Room"],
@@ -491,6 +512,27 @@
       "get": {
         "tags": ["Room"],
         "summary": "Get room status (manager)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/room/manager/:id/images": {
+      "patch": {
+        "tags": ["Room"],
+        "summary": "Update Images room by ID(Manager)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
