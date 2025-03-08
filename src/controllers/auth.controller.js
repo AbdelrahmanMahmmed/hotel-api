@@ -71,8 +71,8 @@ exports.LoginUser = asyncHandler(async (req, res, next) => {
 
 // Is Verification User With Send email to User
 exports.VerifyUser = asyncHandler(async (req, res, next) => {
-    const user = req.user._id;
-    // const user = await User.findOne({ email: req.body.email });
+    // const user = req.user._id;
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
         return next(new ApiError(`User not found for ${user.email}`, 404));
     }
