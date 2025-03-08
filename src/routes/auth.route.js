@@ -29,6 +29,8 @@ router
     .post(checkVerification, LoginUserValidator, LoginUser);
 
 
+app.use(ProtectedRoters);
+
 // Verify User
 router.post('/verify/user',
     VerifyUser);
