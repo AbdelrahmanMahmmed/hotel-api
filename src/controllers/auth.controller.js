@@ -46,7 +46,7 @@ exports.RegisterUser = asyncHandler(async (req, res, next) => {
     //logger.info(`User registered in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
     // 4) Send the token in response
     res.status(201).json({
-        Customer,
+        user,
         token,
     });
 });
@@ -66,7 +66,7 @@ exports.LoginUser = asyncHandler(async (req, res, next) => {
         sameSite: "Lax"
     });
     //logger.info(`User logged in: ${user.email}, IP: ${req.ip}, Time: ${new Date().toISOString()}`);
-    res.json({ Customer, token });
+    res.json({ user, token });
 });
 
 // Is Verification User With Send email to User
